@@ -37,6 +37,8 @@ android {
 dependencies {
 
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.8'
+    testImplementation project(path: ':app')
+    testImplementation project(path: ':app')
     def roomVersion = "2.4.3"
 //
     //room data base

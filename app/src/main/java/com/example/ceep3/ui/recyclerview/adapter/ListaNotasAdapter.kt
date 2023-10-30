@@ -76,7 +76,7 @@ class ListaNotasAdapter(private var context: Context) :
 
     fun altera(posicao: Int, nota: Nota) {
         notas[posicao] = nota
-        notifyDataSetChanged()
+        notifyItemChanged(posicao)
     }
 
     fun remove(posicao: Int) {

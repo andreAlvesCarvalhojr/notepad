@@ -1,6 +1,6 @@
 package com.example.ceep3.ui.activity
 
-object NotaActivityConstantes {
+object NotaActivityConstants {
 
     const val CHAVE_NOTA: String = "nota"
 //    const val CODIGO_RESULTADO_NOTA_CRIADA = 2

@@ -1,14 +1,11 @@
 package com.example.ceep3.ui.activity
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -18,16 +15,14 @@ import com.example.ceep3.database.dao.NotaDao
 import com.example.ceep3.model.Nota
 import com.example.ceep3.repository.NotaRepository
 import com.example.ceep3.repository.coroutine.MainViewModel
-import com.example.ceep3.ui.activity.NotaActivityConstantes.CHAVE_NOTA
-import com.example.ceep3.ui.activity.NotaActivityConstantes.CHAVE_POSICAO
-import com.example.ceep3.ui.activity.NotaActivityConstantes.CODIGO_REQUISICAO_ALTERA_NOTA
-import com.example.ceep3.ui.activity.NotaActivityConstantes.CODIGO_REQUISICAO_INSERE_NOTA
-import com.example.ceep3.ui.activity.NotaActivityConstantes.POSICAO_INVALIDA
+import com.example.ceep3.ui.activity.NotaActivityConstants.CHAVE_NOTA
+import com.example.ceep3.ui.activity.NotaActivityConstants.CHAVE_POSICAO
+import com.example.ceep3.ui.activity.NotaActivityConstants.CODIGO_REQUISICAO_ALTERA_NOTA
+import com.example.ceep3.ui.activity.NotaActivityConstants.CODIGO_REQUISICAO_INSERE_NOTA
+import com.example.ceep3.ui.activity.NotaActivityConstants.POSICAO_INVALIDA
 import com.example.ceep3.ui.recyclerview.adapter.ListaNotasAdapter
 import com.example.ceep3.ui.recyclerview.adapter.listener.OnItemClickListener
 import com.example.ceep3.ui.recyclerview.helper.callback.NotaItemTouchHelperCallback
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
@@ -54,20 +49,6 @@ class MainActivity : AppCompatActivity() {
             this,
             MainViewModel.MainViewModelFacotory(NotaRepository(this))
         )[MainViewModel::class.java]
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log and toast
-            println(token)
-            Toast.makeText(this@MainActivity, "O seu token de registro é: $token", Toast.LENGTH_SHORT).show()
-        })
     }
 
     private fun initView() {
@@ -218,5 +199,3 @@ class MainActivity : AppCompatActivity() {
         obsNewNota()
     }
 }
-
-

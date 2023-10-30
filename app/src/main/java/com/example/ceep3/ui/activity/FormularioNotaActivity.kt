@@ -9,9 +9,9 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.example.ceep3.R
 import com.example.ceep3.model.Nota
-import com.example.ceep3.ui.activity.NotaActivityConstantes.CHAVE_NOTA
-import com.example.ceep3.ui.activity.NotaActivityConstantes.CHAVE_POSICAO
-import com.example.ceep3.ui.activity.NotaActivityConstantes.POSICAO_INVALIDA
+import com.example.ceep3.ui.activity.NotaActivityConstants.CHAVE_NOTA
+import com.example.ceep3.ui.activity.NotaActivityConstants.CHAVE_POSICAO
+import com.example.ceep3.ui.activity.NotaActivityConstants.POSICAO_INVALIDA
 
 class FormularioNotaActivity : AppCompatActivity() {
 
@@ -26,6 +26,7 @@ class FormularioNotaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_formulario_nota)
 
         title = TITULO_APP_BAR_INSERE
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         inicializaCampos()
 
         // Recebe dados da Nota
@@ -45,11 +46,18 @@ class FormularioNotaActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (ehMenuSalvaNota(item)) {
-            val notaCriada: Nota = criaNota()
-            retornaNota(notaCriada)
-            finish()
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                finish()
+            }
+            R.id.menu_formulario_nota_ic_salva -> {
+                val notaCriada: Nota = criaNota()
+                retornaNota(notaCriada)
+                finish()
+            }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -69,11 +77,6 @@ class FormularioNotaActivity : AppCompatActivity() {
         resultadoIncersao.putExtra(CHAVE_NOTA, nota)
         resultadoIncersao.putExtra(CHAVE_POSICAO, posicaoRecebida)
         setResult(Activity.RESULT_OK, resultadoIncersao)
-    }
-
-    private fun ehMenuSalvaNota(item: MenuItem): Boolean {
-        return item.itemId == R.id.menu_formulario_nota_ic_salva
-
     }
 
     private fun criaNota(): Nota {

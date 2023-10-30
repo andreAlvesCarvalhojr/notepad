@@ -7,7 +7,7 @@ import java.io.Serializable
 @Entity
 class Nota(
     val titulo: String,
-    val descricao: String
+    var descricao: String
 ) : Serializable {
     @PrimaryKey(autoGenerate = true)
     private var id: Int = 0
